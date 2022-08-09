@@ -13,7 +13,6 @@ router.get('/', async (req, res) =>
 
     if (!locationData)
     {
-      console.log("Data not found");
       const URL = `${process.env.IQAIR_URL}&state=${req.body.state}&city=${req.body.city}&key=${process.env.IQAIR_KEY}`;
       const data = await fetch(URL);
       const updatedData = await data.json();
@@ -32,13 +31,11 @@ router.get('/', async (req, res) =>
       }
       else
       {
-        console.log("hit error from data not found")
         return res.status(400).json(updatedData.status);
       }
     }
     else
     {
-      console.log("Data found");
       return res.status(200).json(locationData);
     }
   }
