@@ -17,6 +17,11 @@ mongoose.connect(process.env.DATABASE_URL, {
     useUnifiedTopology: true
 });
 
+
+const cacheController = require('./controllers/cache_controllers.js');
+app.use('/cache', cacheController);
+
+
 const db = mongoose.connection;
 
 db.on('error', (err) => console.log(err.message + ' is mongo not running?'));
