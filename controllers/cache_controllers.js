@@ -37,7 +37,7 @@ router.get('/', async (req, res) =>
         const modifiedData =
         {
           city: req.body.city,
-          // state: req.body.state,
+          state: req.body.state,
           air_quality: updatedData.data.current.pollution.aqius
         }
 
