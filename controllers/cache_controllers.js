@@ -4,19 +4,6 @@ const location = require('../models/location.js');
 require('dotenv').config({});
 const fetch = require('node-fetch');
 
-//create
-router.post('/', async (req, res) =>
-{
-  try
-  {
-    const new_data = await location.create(req.body)
-    res.json(new_data)
-  } catch (error)
-  {
-    res.status(400).json(error);
-  }
-});
-
 //show
 router.get('/', async (req, res) =>
 {
