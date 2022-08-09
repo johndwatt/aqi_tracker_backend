@@ -24,8 +24,6 @@ router.get('/', async (req, res) =>
   {
     const locationData = await location.findOne({ city: req.body.city });
 
-    console.log(locationData);
-
     if (!locationData)
     {
       const URL = `${process.env.IQAIR_URL}&state=${req.body.state}&city=${req.body.city}&key=${process.env.IQAIR_KEY}`;
