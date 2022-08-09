@@ -4,19 +4,6 @@ const location = require('../models/location.js');
 require('dotenv').config({});
 const fetch = require('node-fetch');
 
-//create
-router.post('/', async (req, res) =>
-{
-  try
-  {
-    const new_data = await location.create(req.body)
-    res.json(new_data)
-  } catch (error)
-  {
-    res.status(400).json(error);
-  }
-});
-
 //show
 router.get('/', async (req, res) =>
 {
@@ -26,6 +13,7 @@ router.get('/', async (req, res) =>
 
     if (!locationData)
     {
+      console.log("Data not found");
       const URL = `${process.env.IQAIR_URL}&state=${req.body.state}&city=${req.body.city}&key=${process.env.IQAIR_KEY}`;
       const data = await fetch(URL);
       const updatedData = await data.json();
@@ -44,11 +32,13 @@ router.get('/', async (req, res) =>
       }
       else
       {
+        console.log("hit error from data not found")
         return res.status(400).json(updatedData.status);
       }
     }
     else
     {
+      console.log("Data found");
       return res.status(200).json(locationData);
     }
   }

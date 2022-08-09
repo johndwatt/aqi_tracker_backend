@@ -7,8 +7,10 @@ const locationSchema = new Schema(
     state: { type: String },
     air_quality: { type: Number },
   },
-  { timestamps: true, expireAfterSeconds: 10 }
+  { timestamps: true }
 );
+
+locationSchema.index({createdAt: 1}, {expireAfterSeconds: 10800});
 
 const location = mongoose.model('location', locationSchema);
 
