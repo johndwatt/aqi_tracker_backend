@@ -5,7 +5,7 @@ require('dotenv').config({});
 const fetch = require('node-fetch');
 
 //show
-router.get('/', async (req, res) =>
+router.post('/', async (req, res) =>
 {
   try
   {
