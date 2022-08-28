@@ -12,7 +12,7 @@ app.use(require("./middleware/logger"));
 
 
 // mongoose connection
-mongoose.connect('mongodb://localhost:27017/atmos' || process.env.DATABASE_URL, {
+mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017/atmos', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

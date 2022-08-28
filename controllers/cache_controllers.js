@@ -8,14 +8,16 @@ const fetch = require('node-fetch');
 router.post('/', async (req, res) =>
 {
   try {
-    const locationData = await location.findOne({ city: req.body.city });
+    const locationData = await location.findOne({ city: req.body.city, state: req.body.state });
 
     if (!locationData) {
+      console.log("NO")
       const URL = `${process.env.IQAIR_URL}&state=${req.body.state}&city=${req.body.city}&key=${process.env.IQAIR_KEY}`;
       const data = await fetch(URL);
       const updatedData = await data.json();
 
       if (updatedData.status === "success") {
+        console.log("SUCCESS")
         const modifiedData =
         {
           city: req.body.city,
@@ -27,10 +29,12 @@ router.post('/', async (req, res) =>
         return res.status(201).json(new_data);
       }
       else {
-        return res.status(400).json(updatedData.status);
+        console.log("FAIL")
+        return res.status(400).json(updatedData);
       }
     }
     else {
+      console.log("YES")
       return res.status(200).json(locationData);
     }
   }
