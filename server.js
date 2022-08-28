@@ -12,15 +12,10 @@ app.use(require("./middleware/logger"));
 
 
 // mongoose connection
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(process.env.DATABASE_URL_2 || 'mongodb://localhost:27017/atmos', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
-
-const cacheController = require('./controllers/cache_controllers.js');
-app.use('/cache', cacheController);
-
 
 const db = mongoose.connection;
 
@@ -28,7 +23,11 @@ db.on('error', (err) => console.log(err.message + ' is mongo not running?'));
 db.on('connected', () => console.log('mongo connected'));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
-const PORT = process.env.PORT;
+// controllers 
+const cacheController = require('./controllers/cache_controllers.js');
+app.use('/cache', cacheController);
+
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`The server is listening on port: ${PORT}`)
 });
