@@ -27,7 +27,7 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 const cacheController = require('./controllers/cache_controllers.js');
 app.use('/cache', cacheController);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`The server is listening on port: ${PORT}`)
 });
